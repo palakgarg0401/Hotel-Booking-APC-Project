@@ -1,4 +1,4 @@
 package com.hotelBooking.Backend.service;
 
-public class BookedRoomServiceImpl {
+public class BookedRoomService {
 }
