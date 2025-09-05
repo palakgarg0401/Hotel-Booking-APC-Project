@@ -4,4 +4,6 @@ import com.hotelBooking.Backend.model.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RoomRepository extends JpaRepository<Room, Long> {
+    @Query("SELECT DISTINCT r.roomType FROM Room r")
+    List<String> findDistinctRoomTypes();
 }
