@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+
 import {Col } from 'react-bootstrap';
 import { deleteRoom,getAllRooms } from '../utils/ApiFunctions';
 import RoomFilter from '../common/RoomFilter';
 import RoomPaginator from '../common/RoomPaginator';
-import {FaEdot, FaEye,FaTrashAlt} from "react-icons/fa"
+import { FaEdit, FaEye, FaTrashAlt } from "react-icons/fa"
+
 import {Link} from "react-router-dom"
 
 const ExistingRooms = () => {
@@ -18,15 +20,19 @@ const ExistingRooms = () => {
   useEffect(()=>{
     fetchRooms()
   },[])
-  const fetchRooms=async()=>{
-    setRooms(result)
-    setIsLoading(true)
-    try{
-        const result=await getAllRooms
-    }catch(error){
-        setErrorMessage(error.message)
-    }
+  const fetchRooms = async () => {
+  setIsLoading(true);
+  try {
+    const result = await getAllRooms();   // ✅ properly call API
+    setRooms(result);                     // ✅ use result AFTER it's defined
+    setFilteredRooms(result);             // ✅ also refresh filtered rooms
+  } catch (error) {
+    setErrorMessage(error.message);
+  } finally {
+    setIsLoading(false);
   }
+};
+
   useEffect(()=>{
     if(selectedRoomType===""){
         setFilteredRooms(rooms)

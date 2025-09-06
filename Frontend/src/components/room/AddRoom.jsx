@@ -16,7 +16,7 @@ const AddRoom = () => {
     let value=e.target.value
     if(name==="roomPrice"){
       if(!isNaN(value)){
-        value.parseInt(value)
+        value = parseInt(value, 10)
       }else{
         value=""
       }
@@ -27,7 +27,7 @@ const AddRoom = () => {
   const handleImageChange=(e)=>{
     const selectedImage=e.target.files[0]
     setNewRoom({...newRoom,photo:selectedImage})
-    setImagePreview(URL,createObjectURL(selectedImage))
+    setImagePreview(URL.createObjectURL(selectedImage))
   }
 
   const handleSubmit=async(e)=>{
