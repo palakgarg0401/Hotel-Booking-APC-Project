@@ -40,6 +40,7 @@ export async function getAllRooms(){
     }
 }
 
+// This function deletes a room by the Id
 export async function deleteRoom(roomId){
     try{
         const result =await api.delete(`/rooms/delete/room/${roomId}`)
