@@ -21,6 +21,7 @@ import java.sql.SQLException;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/rooms")
+@CrossOrigin(origins = "http://localhost:5173")
 public class RoomController {
     private final IRoomService roomService;
     private final BookingService bookingService;
@@ -64,12 +65,12 @@ public class RoomController {
 
     private RoomResponse getRoomResponse(Room room){
         List<BookedRoom> bookings = getAllBookingsByRoomId(room.getId());
-        List<BookingResponse> bookingInfo = bookings
-                .stream()
-                .map(booking -> new BookingResponse(booking.getBookingId(),
-                        booking.getCheckInDate(),
-                        booking.getCheckOutDate(),
-                        booking.getBookingConfirmationCode())).toList();
+//        List<BookingResponse> bookingInfo = bookings
+//                .stream()
+//                .map(booking -> new BookingResponse(booking.getBookingId(),
+//                        booking.getCheckInDate(),
+//                        booking.getCheckOutDate(),
+//                        booking.getBookingConfirmationCode())).toList();
 
     byte[] photoBytes = null;
     Blob photoBlob = room.getPhoto();
@@ -83,7 +84,7 @@ public class RoomController {
     return new RoomResponse(room.getId(),
             room.getRoomType(),
             room.getRoomPrice(),
-            room.isBooked(), photoBytes, bookingInfo);
+            room.isBooked(), photoBytes);
     }
 
     private List<BookedRoom> getAllBookingsByRoomId(Long roomId){
