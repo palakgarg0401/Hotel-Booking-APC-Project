@@ -1,5 +1,7 @@
 package com.hotelBooking.Backend.service;
-@author
+
+import org.springframework.stereotype.Service;
+
 @Service
 public class BookedRoomService {
 }

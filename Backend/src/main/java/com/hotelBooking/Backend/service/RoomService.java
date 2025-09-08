@@ -1,11 +1,13 @@
 package com.hotelBooking.Backend.service;
 
+import com.hotelBooking.Backend.exception.ResourceNotFoundException;
 import com.hotelBooking.Backend.model.Room;
 import com.hotelBooking.Backend.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.*;
 import javax.sql.rowset.serial.SerialBlob;
 import java.math.BigDecimal;
 import java.sql.Blob;
@@ -28,23 +30,26 @@ public class RoomService implements IRoomService {
         }
         return roomRepository.save(room);
     }
+
     @Override
     public List<String> getAllRoomTypes(){
         return roomRepository.findDistinctRoomTypes();
     }
+
     @Override
-    public List<Room> getAllRooms(){
+    public List<Room> getAllRooms() {
         return roomRepository.findAll();
     }
+
     @Override
-    public byte[] getRoomPhotoByRoomId(Long roomId){
-        Optional<Room> theRoom=roomRepository.findById(roomId);
-        if(theRoom.isEmpty()){
-            throw new ResourceNotFoundException("Sorrt, room not found!")
+    public byte[] getRoomPhotoByRoomId(Long roomId) throws SQLException {
+        Optional<Room> theRoom = roomRepository.findById(roomId);
+        if(theRoom.isEmpty()) {
+            throw new ResourceNotFoundException("Sorry, Romm not found!");
         }
-        Blob photoBlob=theRoom.get().getPhoto();
-        if(photoBlob!=null){
-            return photoBlob.getBytes(1,(int)photoBlob.length());
+        Blob photoBlob = theRoom.get().getPhoto();
+        if(photoBlob != null) {
+            return photoBlob.getBytes(1, (int) photoBlob.length());
         }
         return null;
     }

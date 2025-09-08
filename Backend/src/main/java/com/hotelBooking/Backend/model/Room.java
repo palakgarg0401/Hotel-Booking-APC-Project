@@ -1,13 +1,11 @@
 package com.hotelBooking.Backend.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import java.sql.Blob;
+import java.sql.Blob; // Used to store binary data (e.g., room photos)
 import java.util.*;
-import java.math.BigDecimal;
+import java.math.BigDecimal; // Used for money/price because double is not precise enough
 
 @Entity
 @Getter

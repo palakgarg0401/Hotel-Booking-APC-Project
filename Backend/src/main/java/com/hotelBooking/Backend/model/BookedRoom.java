@@ -1,8 +1,10 @@
 package com.hotelBooking.Backend.model;
 
+// provide JPA Annotations that are used to map the class to database table
 import jakarta.persistence.*;
+// provide Annotations which reduce boilerplate code
 import lombok.*;
-
+// Java class to represent time
 import java.time.LocalDate;
 
 @Entity
@@ -12,7 +14,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class BookedRoom {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-generates primary key value in database
     private Long bookingId;
 
     @Column(name = "check_In")
@@ -39,8 +41,10 @@ public class BookedRoom {
     @Column(name = "confirmation_Code")
     private String bookingConfirmationCode;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "room_id")
+    // one booking are exactly linked to only one room
+    // many bookings are linked with one room (diff dates, diff guests)
+    @ManyToOne(fetch = FetchType.LAZY) // Room details are fetched from DB only when you actually use them
+    @JoinColumn(name = "room_id") // Foreign key column in BookedRoom table pointing to Room
     private Room room;
 
     public void calculateTotalNumberOfGuest() {
