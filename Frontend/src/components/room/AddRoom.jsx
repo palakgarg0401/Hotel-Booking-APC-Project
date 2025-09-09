@@ -121,4 +121,4 @@ const AddRoom = () => {
   )
 }
 
-export default AddRoom
+export default AddRoom;

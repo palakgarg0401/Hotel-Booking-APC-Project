@@ -6,9 +6,11 @@ import ExistingRooms from './components/room/ExistingRooms';
 import EditRoom from './components/room/EditRoom';
 import Home from './components/Home/Home';
 import { Routes, Route } from 'react-router-dom';
+import AddRoom from './components/room/AddRoom';
 
 function App() {
   return (
+    <>
     <main>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -16,6 +18,9 @@ function App() {
         <Route path="/existing-rooms" element={<ExistingRooms />} />
       </Routes>
     </main>
+    <AddRoom />
+    <ExistingRooms />
+    </>
   )
 }
 
