@@ -1,5 +1,6 @@
 package com.hotelBooking.Backend.service;
 
+import com.hotelBooking.Backend.exception.InternalServerException;
 import com.hotelBooking.Backend.exception.ResourceNotFoundException;
 import com.hotelBooking.Backend.model.Room;
 import com.hotelBooking.Backend.repository.RoomRepository;
@@ -52,5 +53,47 @@ public class RoomService implements IRoomService {
             return photoBlob.getBytes(1, (int) photoBlob.length());
         }
         return null;
-    }
+    } 
+
+	@Override
+	public void deleteRoom(Long roomId) {
+		// TODO Auto-generated method stub
+		Optional<Room> theRoom = roomRepository.findById(roomId);
+		if(theRoom.isPresent()) {
+			roomRepository.deleteById(roomId);
+		}
+	}
+
+	@Override
+	public Room updateRoom(Long roomId, String roomType, BigDecimal roomPrice, byte[] photoBytes) {
+		// TODO Auto-generated method stub
+		Room room = roomRepository.findById(roomId)
+				.orElseThrow(() -> new ResourceNotFoundException("Room not found"));
+		
+		if(roomType != null) {
+			room.setRoomType(roomType);
+		}
+		if(roomPrice != null) {
+			room.setRoomPrice(roomPrice);
+		}
+		if(photoBytes != null && photoBytes.length > 0) {
+			try {
+				room.setPhoto(new SerialBlob(photoBytes));
+			}
+			catch(SQLException ex) {
+				throw new InternalServerException("Error in updating room");
+			}
+		}
+		return roomRepository.save(room);
+	}
+
+	
 }
+
+
+
+
+
+
+
+

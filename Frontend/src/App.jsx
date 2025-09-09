@@ -2,14 +2,20 @@ import React from 'react'
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
-import AddRoom from './components/room/AddRoom'
 import ExistingRooms from './components/room/ExistingRooms';
-function App(){
+import EditRoom from './components/room/EditRoom';
+import Home from './components/Home/Home';
+import { Routes, Route } from 'react-router-dom';
+
+function App() {
   return (
-    <div className='container mt-5 mb-5'>
-    <AddRoom/>
-    <ExistingRooms />
-    </ div>
+    <main>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/edit-room/:roomId" element={<EditRoom />} />
+        <Route path="/existing-rooms" element={<ExistingRooms />} />
+      </Routes>
+    </main>
   )
 }
 

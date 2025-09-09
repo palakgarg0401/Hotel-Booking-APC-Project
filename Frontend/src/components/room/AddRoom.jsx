@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { addRoom } from '../utils/ApiFunctions'
+import React, { useEffect, useState } from 'react'
+import { addRoom, getRoomById } from '../utils/ApiFunctions'
 import RoomTypeSelector from '../common/RoomTypeSelector'
 
 const AddRoom = () => {
@@ -25,6 +25,8 @@ const AddRoom = () => {
     }
     setNewRoom({...newRoom, [name]: value})
   }
+
+  
 
   const handleImageChange = (e) => {
     const selectedImage = e.target.files[0]
