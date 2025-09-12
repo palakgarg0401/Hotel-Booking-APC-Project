@@ -26,16 +26,36 @@ const EditRoom = ()=>{
     }
 
     useEffect(()=>{
-        const fetchRoom = async ()=>{
-            try{
-                const roomData = await getRoomById(roomId)
-                setRoom(roomData)
-                setImagePreview(roomData.photo);
+        // const fetchRoom = async ()=>{
+        //     try{
+        //         const roomData = await getRoomById(roomId)
+        //         setRoom(roomData)
+        //         setImagePreview(roomData.photo);
         
-            }catch(error){
-                console.log(error)
+        //     }catch(error){
+        //         console.log(error)
+        //     }
+        // }
+        const fetchRoom = async () => {
+        try {
+            const roomData = await getRoomById(roomId);
+            console.log("Fetched room data:", roomData);
+
+            setRoom({
+                roomType: roomData.roomType,
+                roomPrice: roomData.roomPrice,
+                photo: null
+            });
+
+            if (roomData.photo) {
+                const imageURL = `data:image/png;base64,${roomData.photo}`;
+                console.log("Constructed image URL:", imageURL);
+                setImagePreview(imageURL);
             }
+        } catch (error) {
+            console.error("Error fetching room:", error);
         }
+    };
     
         fetchRoom()
     },[roomId])
@@ -59,12 +79,11 @@ const EditRoom = ()=>{
         }
     };
 
-    return (
-    <>
-    <section className = "container mt-5 mb-5">
+return (
+    <div className = "container mt-5 mb-5">
+        <h3 className='text-center mb-5 mt-5'>Edit Room</h3>
         <div className = "row justify-content-center">
             <div className = "col-md-8 col-lg-6">
-            <h2 className = "mt-5 mb-2">Add a new Room</h2>
             {successMessage &&(
                 <div className = "alert alert-success" role="alert">{successMessage}</div>
             )}
@@ -91,8 +110,9 @@ const EditRoom = ()=>{
                 </div>
 
                 <div className="mb-3">
-                <label htmlFor="photo" className="form-label">Room Photo</label>
+                <label htmlFor="photo" className="form-label hotel-color">Photo</label>
                 <input
+                required
                 id="photo"
                 name="photo"
                 type="file"
@@ -100,13 +120,14 @@ const EditRoom = ()=>{
                 onChange={handleImageChange}
                 />
                 {imagePreview &&(
-                    <img src = {imagePreview}
-                    alt = "Preview Room Photo"
+                    <img
+                    src = {imagePreview}
+                    alt = "Room preview"
                     style = {{maxWidth: "400px", maxHeight: "400px"}}
-                    className = "mb-3"/>
+                    className = "mt-3"/>
                 )}
                 </div>
-                <div className="d-grid d-md-flex mt-2">
+                <div className="d-grid gap-2 d-md-flex mt-2">
                     <Link to={"/existing-rooms"} className='btn btn-outline-info ml-5'>
                         back
                     </Link>
@@ -117,8 +138,7 @@ const EditRoom = ()=>{
             </div>
         </div>
 
-    </section>
-    </>
+    </div>
 )
     
 }
