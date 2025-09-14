@@ -79,10 +79,69 @@ body {
     height: '100vh'
   }
 
+/* Main header / hero banner */
+.header-banner {
+  position: relative;
+  height: 80vh; /* adjust height as needed */
+  background-image: url('../assets/service2.jpg'); /* replace with correct path */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+
+.header-banner .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4); /* dark overlay for readability */
+  z-index: 1;
+}
+
+.header-banner h1,
+.header-banner h4 {
+  position: relative;
+  z-index: 2; /* text above overlay */
+  margin: 0.5rem 0;
+}
+
+.header-banner h1 {
+  font-size: 3rem; /* increase as needed */
+}
+
+.header-banner h4 {
+  font-size: 1.5rem;
+}
+
+/* Responsive text */
+@media (max-width: 768px) {
+  .header-banner h1 {
+    font-size: 2rem;
+  }
+  .header-banner h4 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-banner h1 {
+    font-size: 1.5rem;
+  }
+  .header-banner h4 {
+    font-size: 0.9rem;
+  }
+}
 
 
 .parallax {
-  background-image: url("./assets/images/parrall.jpg");
+  background-image: url("../src/assets/hotel-background.jpg");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -94,7 +153,7 @@ body {
   position: relative;
   height: 150px;
   background-size: cover;
-  background-image: url("./assets/images/services4.jpg");
+  background-image: url("../src/assets/service2.jpg");
   background-position: center center;
 }
 .header-title {
@@ -188,13 +247,22 @@ body {
   }
 
 /* The header banner */
-.header-banner {
+/* .header-banner {
   background-image:  url("./assets/images/services-1.jpg");
    background-size: cover;
   background-position: center;
    position: relative;
   height: 80vh;
- }
+ } */
+
+ .header-banner {
+  position: relative;
+  height: 80vh;
+  background-image: url('../src/assets/bg2.jpg'); /* path relative to CSS file */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
 .header-banner {
   position: relative;

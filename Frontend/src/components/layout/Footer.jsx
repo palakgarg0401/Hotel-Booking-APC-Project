@@ -4,7 +4,7 @@ import { Container,Row,Col } from 'react-bootstrap';
 const Footer = () => {
   let today = new Date();
   return (
-    <footer className="bg-dark text-light py-3 footer mt-lg-5">
+    <footer className="bg-dark text-light py-4 footer mt-lg-3">
         <Container>
             <Row>
                 <Col xs={12} md={12} className="text-center">
@@ -14,6 +14,7 @@ const Footer = () => {
         </Container>
       
     </footer>
+
   )
 }
 
