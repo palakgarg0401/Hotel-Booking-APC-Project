@@ -14,7 +14,7 @@ const NavBar = () => {
         <div className='container-fluid'> 
             <Link to={"/"}>
 
-            <span className='hotel-color'> lakeSide Hotel</span>
+            <span className='hotel-color'>Bookify Hotel</span>
             </Link>
             <button
             className='navbar-toggler'
