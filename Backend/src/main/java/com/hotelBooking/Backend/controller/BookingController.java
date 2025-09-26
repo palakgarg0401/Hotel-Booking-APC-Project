@@ -23,7 +23,7 @@ public class BookingController {
     private final IBookingService bookingService;
     private final IRoomService roomService;
 
-    @GetMapping("all-bookings")
+    @GetMapping("/all-bookings")
     public ResponseEntity<List<BookingResponse>> getAllBookings(){
         List<BookedRoom> bookings = bookingService.getAllBookings();
         List<BookingResponse> bookingResponses = new ArrayList<>();
@@ -62,7 +62,7 @@ public class BookingController {
     }
 
     private BookingResponse getBookingResponse(BookedRoom booking){
-        Room theRoom = roomService.getRoomById(booking.getRoom().getId().get());
+        Room theRoom = roomService.getRoomById(booking.getRoom().getId()).get();
         RoomResponse room = new RoomResponse(
                 theRoom.getId(),
                 theRoom.getRoomType(),

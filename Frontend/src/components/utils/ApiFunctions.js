@@ -71,3 +71,51 @@ export async function getRoomById(roomId){
         throw new Error(`Error Fetching room ${err.message}`);
     }
 }
+
+/* This function saves a new booking to the database */
+export async function bookRoom(roomId, booking){
+    try{
+        const response = await api.post(`/bookings/room/${roomId}/booking`, booking)
+        return response.data
+    } catch(error){
+        if(error.response && error.response.data){
+            throw new Error(error.response.data)
+        } else{
+            throw new Error(`Error booking room : ${error.message}`)
+        }
+    }
+}
+
+/* This function gets all bookings from the database */
+export async function getAllBookings() {
+    try{
+        const result = await api.get("/bookings/all-bookings")
+        return result.data
+    }catch(error){
+        throw new Error(`Error fetching bookings : ${error.message}`)
+    }
+}
+
+/* Thos function gets the booking by the confirmation code */
+export async function getBookingByConfirmationCode(confirmationCode){
+    try{
+        const result = await api.get(`/bookings/confirmation/${confirmationCode}`)
+        return result.data
+    }catch(error){
+        if(error.response && error.response.data){
+            throw new Error(error.response.data)
+        } else{
+            throw new Error(`Error find booking : ${error.message}`)
+        }
+    }
+}
+
+/* This function cancels the booking */
+export async function cancelBooking(bookingId){
+    try{
+        const result = await api.delete(`/bookings/booking/${bookingId}/delete`)
+        return result.data
+    }catch(error){
+        throw new Error(`Error cancelling booking : ${error.message}`)
+    }
+}
