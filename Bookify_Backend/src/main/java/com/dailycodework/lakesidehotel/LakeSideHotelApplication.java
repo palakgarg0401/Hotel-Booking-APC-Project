@@ -10,4 +10,4 @@ public class LakeSideHotelApplication {
         SpringApplication.run(LakeSideHotelApplication.class, args);
     }
 
-}
+}   
